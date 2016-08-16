@@ -1,0 +1,44 @@
+﻿@section scripts{
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/AngularScripts/GetOrder.js"></script> 
+<script src="~/Scripts/MenuScripts/page1.js"></script>
+    } 
+    <div ng-app="OrderApp">
+        <input type="text" ng-model="searchLastName" placeholder="Фамилия"  />            
+        <input type="text" ng-model="phone" placeholder="Номер телефона" />           
+            <input type="submit" value="Найти" />
+            <div ng-controller="OrderController">
+                <table class="table">
+                    <thead style="background-color:gray;">
+                        <tr>
+                            <td style="display:none">ID</td>
+                            <td>Имя</td>
+                            <td>Фамилия</td>
+                            <td>Номер телефона</td>
+                            <td>Адрес</td>
+                            <td>Дата открытия</td>
+                            <td>Дата закрытия</td>
+                            <td>Сумма</td>
+                            @*<td></td>
+                            <td></td>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <tr ng-repeat="or in orders|filter:phone|filter:searchLastName">
+                            <td style="display:none">{{or.OrderID}}</td>
+                            <td>{{or.FirstName}}</td>
+                            <td>{{or.LastName}}</td>
+                            <td>{{or.PhoneNumber}}</td>
+                            <td>{{or.Address}}</td>
+                            <td>{{or.DateCreate| mydate| date:"dd-MM-yyyy HH-mm-ss"}}</td>
+                            <td>{{or.DateAdd | mydate| date:"dd/MM/yyyy"}}</td>
+                            <td>{{or.Summa}}</td>
+                            <@*td><button ng-click="update(orders[$index])">Редактировать</button></td>
+                            <td><button ng-click="delete($index)">Удалить</button></td>*@
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>

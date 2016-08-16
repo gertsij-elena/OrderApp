@@ -1,0 +1,69 @@
+﻿@section scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/AngularScripts/AddOrder.js"></script>
+    <script src="~/Scripts/AngularScripts/GetSumma.Js"></script>
+    <script src="~/Scripts/MenuScripts/page2.js"></script>
+}
+    <div>Выбрать товар:</div>
+    <div ng-app="ProductApp"ng-controller="ProductController">
+        <form name="productForm">
+            <select ng-model="product.ProductId"  >
+                <option ng-repeat="x in products" value="{{x.ProductId}}">{{x.Name}}</option>
+            </select>
+            <p>Выбрать количество:</p>
+                <select ng-model="product.Count" ng-blur="SelectFunction()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+        </form>
+    </div>
+    <div id="OrderForm"ng-app="OrderApp" ng-controller="OrderController">
+        <form name="createForm" ng-submit="AddOrder()">
+            <table>
+                <tr>
+                    <td>Имя</td>
+                    <td><input name="name" type="text" ng-model="order.FirstName" required placeholder="Введите имя" />
+                    <span ng-show="createForm.name.$touched && createForm.name.$invalid">поле обязательно</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Фамилия</td>
+                    <td>
+                       <input name="family"type="text" ng-model="order.LastName" required placeholder="Введите фамилию" />
+                       <span ng-show="createForm.family.$touched && createForm.family.$invalid">поле обязательно</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Телефон</td>
+                    <td><input name="phone" type="text" ng-model="order.PhoneNumber" required placeholder="Введите номер телефона" />
+                    <span ng-show="createForm.phone.$touched && createForm.phone.$invalid">поле обязательно</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Адрес</td>
+                    <td><input name="adress"type="text" ng-model="order.Address" placeholder="Введите адрес" />
+                   
+                    </td>
+                </tr>
+                <tr>
+                    <td>Сумма</td>
+                    <td class="summa"><td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Добавить" ng-disabled="createForm.$invalid" /></td>
+                </tr>
+            </table>
+          
+        </form>
+       
+       
+    </div>
+
+
+
+
+
+
