@@ -3,42 +3,56 @@
 <script src="~/Scripts/angular.min.js"></script>
 <script src="~/Scripts/AngularScripts/GetOrder.js"></script> 
 <script src="~/Scripts/MenuScripts/page1.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-2.1.3.min.js"></script>
+
     } 
     <div ng-app="OrderApp">
-        <input type="text" ng-model="searchLastName" placeholder="Фамилия"  />            
-        <input type="text" ng-model="phone" placeholder="Номер телефона" />           
-            <input type="submit" value="Найти" />
+
+        Поиск по фамилии:
+        <input type="text" ng-model="searchLastName" placeholder="Например,Иванов"  />
+        по номеру телефона:           
+        <input type="text" ng-model="phone" placeholder="Например,8-067-076-5615" />           
+           
             <div ng-controller="OrderController">
+               
                 <table class="table">
                     <thead style="background-color:gray;">
                         <tr>
-                            <td style="display:none">ID</td>
-                            <td>Имя</td>
-                            <td>Фамилия</td>
-                            <td>Номер телефона</td>
-                            <td>Адрес</td>
+                            <td style="display:none">ID</td>                           
+                            <td>Фамилия</td>                           
                             <td>Дата открытия</td>
-                            <td>Дата закрытия</td>
                             <td>Сумма</td>
-                            @*<td></td>
-                            <td></td>*@
+                            <td></td>
+                            <td></td>                            
                         </tr>
                     </thead>
                     <tbody>
                        
-                        <tr ng-repeat="or in orders|filter:phone|filter:searchLastName">
-                            <td style="display:none">{{or.OrderID}}</td>
-                            <td>{{or.FirstName}}</td>
-                            <td>{{or.LastName}}</td>
-                            <td>{{or.PhoneNumber}}</td>
-                            <td>{{or.Address}}</td>
-                            <td>{{or.DateCreate| mydate| date:"dd-MM-yyyy HH-mm-ss"}}</td>
-                            <td>{{or.DateAdd | mydate| date:"dd/MM/yyyy"}}</td>
-                            <td>{{or.Summa}}</td>
-                            <@*td><button ng-click="update(orders[$index])">Редактировать</button></td>
-                            <td><button ng-click="delete($index)">Удалить</button></td>*@
+                        <tr ng-repeat="order in orders|filter:phone|filter:searchLastName">
+                            <td style="display:none">{{or.OrderID}}</td>                            
+                            <td>{{order.LastName}}</td>                          
+                            <td>{{order.DateCreate| mydate| date:"dd/MM/yyyy"}}</td>
+                            <td>{{order.Summa}}грн</td>
+                            <td><button type="button" class="btn btn-default" ng-click="openEdit(order)">Подробнее</button></td>
+                            <td><button type="button" class="btn btn-default" ng-click="checked(order)">Отправить в архив</button></td>
+                           
                         </tr>
                     </tbody>
                 </table>
+                <div id="modal">
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$ctrl.cancel()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h3 class="modal-title" id="modal-title">Заказчик:{{or.FirstName}}  {{or.LastName}} </h3>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            номер телефона :{{or.PhoneNumber}}
+                            адрес: {{or.Address}}                           
+                        </div>                       
+                    </script>
+                </div>
+              
             </div>
         </div>

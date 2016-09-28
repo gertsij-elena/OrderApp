@@ -16,14 +16,22 @@ namespace Solution.Controllers
         [HttpPost]
         public JsonResult GetSumma(Product product)
         {
+            if (product != null) {
             var id = product.ProductId;
             var pr = db.Products.Find(id);
             var price = pr.Price;
             var count = product.Count;
             var summa = price * count;
             var result = summa.ToString();
-            return Json(result, JsonRequestBehavior.AllowGet);
-            //return Json(new { status = "Ваш заказ успешно добавлен." });
+                return Json(result, JsonRequestBehavior.AllowGet);
+                //return Json(new { status = "Ваш заказ успешно добавлен." });
+            }
+            else
+            {
+                var result = "Не выбран товар или не указано количество";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         // GET: Product/Details/5

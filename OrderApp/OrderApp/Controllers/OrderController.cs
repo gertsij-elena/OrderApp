@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using OrderApp.Models;
-using PagedList;
+
 
 namespace OrderApp.Controllers
 {
@@ -54,24 +53,25 @@ namespace OrderApp.Controllers
           
         }
         // GET: Order/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditOrder(int id)
         {
             return View();
         }
 
         // POST: Order/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult EditOrder(Order order)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var or = db.Orders.Find(order.OrderId);
+                or.Old = true;
+                db.SaveChanges();
+                return Json(new { status = "Ваш заказ отравлен в архив" });
             }
             catch
             {
-                return View();
+                return Json(new { status = "Произошла ошибка!Повторите отправку в архив" });
             }
         }
 
@@ -83,12 +83,12 @@ namespace OrderApp.Controllers
 
         // POST: Order/Delete/5
         [HttpPost]
-        public JsonResult DeleteOrder(int id)
+        public JsonResult DeleteOrder(Order order)
         {
             try
             {
-                var order = db.Orders.Find(id);
-                db.Orders.Remove(order);
+                var or = db.Orders.Find(order.OrderId);
+                db.Orders.Remove(or);
                 db.SaveChanges();
                 return Json(new { status = "Заказ удален" });
                
