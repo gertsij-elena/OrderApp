@@ -83,11 +83,11 @@ namespace OrderApp.Controllers
 
         // POST: Order/Delete/5
         [HttpPost]
-        public JsonResult DeleteOrder(Order order)
+        public JsonResult DeleteOrder(int id)
         {
             try
             {
-                var or = db.Orders.Find(order.OrderId);
+                var or = db.Orders.Find(id);
                 db.Orders.Remove(or);
                 db.SaveChanges();
                 return Json(new { status = "Заказ удален" });
