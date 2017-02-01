@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")  
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top"style="background-color:#03157d;">
         <div class="container">
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">              
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("О программе", "Index", "Home")</li>
                     <li>@Html.ActionLink("Список заказов", "OrderList", "Order")</li>
@@ -30,6 +30,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)  
+    @*<script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/AngularScripts/GetMenu.js"></script>*@
 </body>
 </html>

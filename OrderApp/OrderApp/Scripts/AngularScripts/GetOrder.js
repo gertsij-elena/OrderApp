@@ -12,6 +12,7 @@ OrderApp.controller('OrderController', function ($scope, OrderService, $uibModal
                 $scope.status = 'Unable to load customer data: ' + error.message;
             });
     };
+    
     $scope.checked = function (order) {
        
         OrderService.editOrder(order)
