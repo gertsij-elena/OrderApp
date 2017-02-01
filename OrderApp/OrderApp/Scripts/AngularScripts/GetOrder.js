@@ -105,10 +105,10 @@ OrderApp.factory('OrderService', ['$http', function ($http) {
             url: '/Order/EditOrder'
         });
     };
-    OrderService.editOrder = function (order) {
+    OrderService.deleteOrder = function (id) {
         return $http({
             method: 'POST',
-            url: '/Order/DeleteOrder'
+            url: '/Order/DeleteOrder'+id
         });
     };
     return OrderService;
